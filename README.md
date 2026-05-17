@@ -56,7 +56,7 @@ sudo -u postgres psql
 In `psql`:
 
 ```sql
-CREATE USER vulnlab WITH PASSWORD 'ReplaceWithVeryStrongPassword123';
+CREATE USER vulnlab WITH PASSWORD '<YOUR_STRONG_PASSWORD_HERE>';
 CREATE DATABASE vulnlab_pro OWNER vulnlab;
 \q
 ```
@@ -64,7 +64,7 @@ CREATE DATABASE vulnlab_pro OWNER vulnlab;
 Set database URL in your shell:
 
 ```bash
-export DATABASE_URL='postgresql://vulnlab:ReplaceWithVeryStrongPassword123@localhost:5432/vulnlab_pro'
+export DATABASE_URL='postgresql://vulnlab:<YOUR_STRONG_PASSWORD_HERE>@localhost:5432/vulnlab_pro'
 ```
 
 > Important: this repo does **not** include complete SQL migrations/seed files for all required tables/data, so you must load the project’s schema/seed dataset into this database before the app will work fully.
@@ -73,13 +73,19 @@ export DATABASE_URL='postgresql://vulnlab:ReplaceWithVeryStrongPassword123@local
 
 From repo root:
 
-Generate `JWT_SECRET` once and reuse it (for example, store it in a `.env` file or your shell profile) so existing tokens are not invalidated on every restart.
+Generate `JWT_SECRET` once and reuse it (for example, store it in a `.env` file or your shell profile) so existing tokens are not invalidated on every restart:
+
+```bash
+openssl rand -base64 48
+```
+
+Then set it explicitly when starting the API.
 
 ```bash
 export PORT=8080
 export BASE_PATH=/api
-export JWT_SECRET="$(openssl rand -base64 48)"
-export DATABASE_URL='postgresql://vulnlab:ReplaceWithVeryStrongPassword123@localhost:5432/vulnlab_pro'
+export JWT_SECRET='<PASTE_THE_SAVED_SECRET_HERE>'
+export DATABASE_URL='postgresql://vulnlab:<YOUR_STRONG_PASSWORD_HERE>@localhost:5432/vulnlab_pro'
 pnpm --filter @workspace/api-server run dev
 ```
 
