@@ -74,7 +74,7 @@ export DATABASE_URL='postgresql://vulnlab:vulnlab123@localhost:5432/vulnlab_pro'
 From repo root:
 
 ```bash
-cd /home/runner/work/Agent-Bot/Agent-Bot
+cd /path/to/Agent-Bot
 export PORT=8080
 export BASE_PATH=/api
 export JWT_SECRET='change-this-to-a-strong-secret'
@@ -93,7 +93,7 @@ curl http://localhost:8080/api/healthz
 From repo root:
 
 ```bash
-cd /home/runner/work/Agent-Bot/Agent-Bot
+cd /path/to/Agent-Bot
 export PORT=24452
 export BASE_PATH=/
 pnpm --filter @workspace/vulnlab-pro run dev
@@ -105,7 +105,7 @@ Open in browser:
 ## 6) Optional: run mockup sandbox
 
 ```bash
-cd /home/runner/work/Agent-Bot/Agent-Bot
+cd /path/to/Agent-Bot
 export PORT=8081
 export BASE_PATH=/__mockup
 pnpm --filter @workspace/mockup-sandbox run dev
@@ -117,7 +117,7 @@ Open:
 ## 7) Useful workspace commands
 
 ```bash
-cd /home/runner/work/Agent-Bot/Agent-Bot
+cd /path/to/Agent-Bot
 pnpm run typecheck
 pnpm run build
 ```
