@@ -73,6 +73,8 @@ export DATABASE_URL='postgresql://vulnlab:ReplaceWithVeryStrongPassword123@local
 
 From repo root:
 
+Generate `JWT_SECRET` once and reuse it (for example, store it in a `.env` file or your shell profile) so existing tokens are not invalidated on every restart.
+
 ```bash
 export PORT=8080
 export BASE_PATH=/api
