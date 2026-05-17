@@ -56,7 +56,7 @@ sudo -u postgres psql
 In `psql`:
 
 ```sql
-CREATE USER vulnlab WITH PASSWORD 'vulnlab123';
+CREATE USER vulnlab WITH PASSWORD 'ReplaceWithVeryStrongPassword123';
 CREATE DATABASE vulnlab_pro OWNER vulnlab;
 \q
 ```
@@ -64,7 +64,7 @@ CREATE DATABASE vulnlab_pro OWNER vulnlab;
 Set database URL in your shell:
 
 ```bash
-export DATABASE_URL='postgresql://vulnlab:vulnlab123@localhost:5432/vulnlab_pro'
+export DATABASE_URL='postgresql://vulnlab:ReplaceWithVeryStrongPassword123@localhost:5432/vulnlab_pro'
 ```
 
 > Important: this repo does **not** include complete SQL migrations/seed files for all required tables/data, so you must load the project’s schema/seed dataset into this database before the app will work fully.
@@ -76,10 +76,12 @@ From repo root:
 ```bash
 export PORT=8080
 export BASE_PATH=/api
-export JWT_SECRET='change-this-to-a-strong-secret'
-export DATABASE_URL='postgresql://vulnlab:vulnlab123@localhost:5432/vulnlab_pro'
+export JWT_SECRET="$(openssl rand -base64 48)"
+export DATABASE_URL='postgresql://vulnlab:ReplaceWithVeryStrongPassword123@localhost:5432/vulnlab_pro'
 pnpm --filter @workspace/api-server run dev
 ```
+
+> Security note: always use a strong DB password and a strong random JWT secret, especially outside local development.
 
 API health check:
 
